@@ -9,6 +9,7 @@ using ::testing::Test;
 TEST(TestGtest, Comparison) {
     EXPECT_EQ(1, 1);
     EXPECT_NE(1, 2);
+    EXPECT_THROW(throwError(), std::runtime_error);
 }
 
 // Test Fixtures: Using the Same Data Configuration for Multiple Tests
@@ -90,6 +91,3 @@ TEST_P(TestVariant, IsValidID)
 INSTANTIATE_TEST_CASE_P(TestVariant, TestAnyType, ::testing::Values(
     ID{12}, ID{"23"}, ID{23.0}
 ));
-
-
-
