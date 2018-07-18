@@ -40,9 +40,14 @@ template <typename MSG=Msg>
 class Job
 {
     const MSG d_msg;
-
+    const std::shared_ptr<MSG> d_msg_sp;
+    
     Job(const MSG& msg) // only works with reference
     : d_msg{msg}
+    {}
+    
+    Job(const std::shared_ptr<MSG>& msg) // only works with reference
+    : d_msg_sp{msg}
     {}
     
     // any function...
@@ -71,10 +76,11 @@ TEST(Test, WithMock)
             .WillOnce(Return(0));
     }
     
+    // shared pointer
+    auto msg_sp = std::make_sahred<MockMsg>();
+    Job<MockMsg> job2{msg};
     
-    
-    
-    
+    EXPECT_CALL(*msg_sp, set(_));
     
 }
 
