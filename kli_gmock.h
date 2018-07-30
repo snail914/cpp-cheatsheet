@@ -4,6 +4,11 @@
 https://github.com/google/googletest/blob/master/googlemock/docs/CheatSheet.md
  * */
 
+// ARRANGE
+// EXPECT
+// ACT
+
+
 using namespace ::testing;
 using ::testing::InSequence;
 using ::testing::Matcher;
