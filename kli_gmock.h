@@ -22,6 +22,10 @@ Struct Msg
     int append(const int) {}                // overloads
 
     int append(const std::string&) {}       // overloads
+    
+    const int& getAge() {}
+    int age;
+    
 };
 
 class MockMsg
@@ -82,6 +86,11 @@ TEST(Test, WithMock)
 
     EXPECT_CALL(*msg_sp, set(_));
 
+    
+    // expect return reference
+    const in age = 10;
+    EXPECT_CALL(*msg_sp, getAge()).WillOnce(Return(age)); // !ERROR
+    EXPECT_CALL(*msg_sp, getAge()).WillOnce(ReturnRef(age)); 
 }
 
 
