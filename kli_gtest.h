@@ -13,7 +13,7 @@ TEST(TestGtest, Comparison) {
 }
 
 // Test Fixtures: Using the Same Data Configuration for Multiple Tests
-class QueueTest : Test {
+class QueueTest : public Test {
   protected:
     void SetUp() override{
         q0_.Enqueue(1);
