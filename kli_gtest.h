@@ -4,6 +4,8 @@ https://github.com/google/googletest/blob/master/googletest/docs/primer.md
 */
 using ::testing::Test;
 
+--gtest_filter=""
+--gtest_repeat=1000 --gtest_shuffle
 
 // Basic Test
 TEST(TestGtest, Comparison) {
