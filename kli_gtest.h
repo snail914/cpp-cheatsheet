@@ -96,6 +96,9 @@ INSTANTIATE_TEST_CASE_P(TestVariant, TestAnyType, ::testing::Values(
 // Typed test
 template <typename T>
 class EncodingStateTest : public ::testing::Test {
+    using List = std::list<T> List;
+    static T shared;
+    T value;
 };
 using StateTypes = ::testing::
     Types<mobt::OrderState, mobt::RouteState, mobt::FillFundamental>;
@@ -105,12 +108,13 @@ TYPED_TEST(EncodingStateTest, SerializeDeserialize)
 {
     // GIVEN
     Encoder          es;
-    TypeParam        entityState;   // Use default value
-
-    // WHEN
-    const auto blob = es.encode(entityState);
-    const auto deserializedState= es.decode<TypeParam>(blob);
-
-    // THEN
-    EXPECT_THAT(entityState, Eq(deserializedState));
+    TypeParam        entityState;   // Access Type
+    TypeParam n      = this->value; // access member attribute
+    // To visit static members of the fixture, add the 'TestFixture::'
+    // prefix.
+    n += TestFixture::shared; // Access static member 
+    // To refer to typedefs in the fixture, add the 'typename TestFixture::'
+    // prefix.  The 'typename' is required to satisfy the compiler.
+    typename TestFixture::List values;
+    values.push_back(n);
 }
