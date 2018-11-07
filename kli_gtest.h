@@ -91,3 +91,26 @@ TEST_P(TestVariant, IsValidID)
 INSTANTIATE_TEST_CASE_P(TestVariant, TestAnyType, ::testing::Values(
     ID{12}, ID{"23"}, ID{23.0}
 ));
+
+
+// Typed test
+template <typename T>
+class EncodingStateTest : public ::testing::Test {
+};
+using StateTypes = ::testing::
+    Types<mobt::OrderState, mobt::RouteState, mobt::FillFundamental>;
+TYPED_TEST_CASE(EncodingStateTest, EntityTypes);
+
+TYPED_TEST(EncodingStateTest, SerializeDeserialize)
+{
+    // GIVEN
+    Encoder          es;
+    TypeParam        entityState;   // Use default value
+
+    // WHEN
+    const auto blob = es.encode(entityState);
+    const auto deserializedState= es.decode<TypeParam>(blob);
+
+    // THEN
+    EXPECT_THAT(entityState, Eq(deserializedState));
+}
