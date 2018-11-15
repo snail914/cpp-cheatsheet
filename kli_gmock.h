@@ -93,6 +93,7 @@ TEST(Test, WithMock)
 
     
     // expect return reference
+    WillOnce()// 不能直接用, 用Times(1)
     const in age = 10;
     EXPECT_CALL(*msg_sp, getAge()).WillOnce(Return(age)); // !ERROR
     EXPECT_CALL(*msg_sp, getAge()).WillOnce(ReturnRef(age)); 
