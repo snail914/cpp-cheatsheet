@@ -96,6 +96,7 @@ TEST(Test, WithMock)
     const in age = 10;
     EXPECT_CALL(*msg_sp, getAge()).WillOnce(Return(age)); // !ERROR
     EXPECT_CALL(*msg_sp, getAge()).WillOnce(ReturnRef(age)); 
+    EXPECT_CALL(d_mockMsgRW, write(msg, num)).Times(1);
 }
 
 
