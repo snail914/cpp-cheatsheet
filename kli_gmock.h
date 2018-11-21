@@ -97,7 +97,9 @@ TEST(Test, WithMock)
     const in age = 10;
     EXPECT_CALL(*msg_sp, getAge()).WillOnce(Return(age)); // !ERROR
     EXPECT_CALL(*msg_sp, getAge()).WillOnce(ReturnRef(age)); 
-    EXPECT_CALL(d_mockMsgRW, write(msg, num)).Times(1);
+    EXPECT_CALL(*msg_sp, getAge()).WillOnce(Throw(std::runtime_error(""))); // Make call to function throw 
+    EXPECT_CALL(d_mockMsgRW, write(msg, num)).Times(1); // Times(1) is redundent
+   
 }
 
 Before gmock v1.8, we are not able to mock a method that returns a non-copyable type (e.g. std::unique_ptr), but starting from v1.8, YES!: https://stackoverflow.com/questions/42505119/how-to-mock-methods-return-object-with-deleted-copy-ctor
