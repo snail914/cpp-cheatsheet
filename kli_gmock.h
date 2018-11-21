@@ -100,4 +100,6 @@ TEST(Test, WithMock)
     EXPECT_CALL(d_mockMsgRW, write(msg, num)).Times(1);
 }
 
+Before gmock v1.8, we are not able to mock a method that returns a non-copyable type (e.g. std::unique_ptr), but starting from v1.8, YES!: https://stackoverflow.com/questions/42505119/how-to-mock-methods-return-object-with-deleted-copy-ctor
+
 
