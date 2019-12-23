@@ -15,14 +15,23 @@ void General<T>::print()
     std::cout << d_t << std::endl;
 }
 
+
+template <typename T>
+void test() {
+    std::cout << T() << std::endl;
+}
+
+
 // template instantiation
 template class General<int>;
 template class General<std::string>;
 
+template void test<int>();
+template void test<std::string>();
+
 // h
 #pragma once
 
-#include <string>
 template <typename T>
 class General
 {
@@ -32,6 +41,20 @@ class General
     void print();
 };
 
+template <typename T>
+void test();
+
+
 // main
 
-General<std::string> g{"123"};
+#include "general.h"
+#include <string>
+
+int main()
+{
+    General<std::string> g{"hello"};
+    g.print();
+    test<int>();
+    test<std::string>();
+}
+
