@@ -1,5 +1,3 @@
-MarkDown cheatsheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet
-
 
 # C++
 ### don't take shared pointers by value unless you want to share/take ownership!
